@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="row pt-4">
+    <div class="col-md-4">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong></strong> {{ message }}.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Add new student</h2>
+            </div>
+            <div class="card-body">
+                <form action="/add" method="POST">
+                    <div class="form-floating mb-2">
+                        <input type="text" name="first_name" class="form-control" placeholder="">
+                        <label>First name</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" name="last_name"  class="form-control" placeholder="">
+                        <label>Last name</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" name="city" class="form-control" placeholder="">
+                        <label>City</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" name="semester" class="form-control" placeholder="">
+                        <label>Semester</label>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-outline-primary">SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h2 class="text-center">List student</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">First name</th>
+                    <th class="text-center">Last name</th>
+                    <th class="text-center">City</th>
+                    <th class="text-center">Semester</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students: %}
+                    <tr>
+                        <td>{{ student.first_name }}</td>
+                        <td>{{ student.last_name }}</td>
+                        <td>{{ student.city }}</td>
+                        <td class="text-center">{{ student.semester }}</td>
+                        <td>
+                            <div class="row">
+                                <form action="/edit" method="POST" class="col-md-6 p-0">
+                                    <input type="hidden" name="id" placeholder="" value="{{ student.id }}">
+                                    <button type="submit" class="btn btn-outline-info">Edit</button>
+                                </form>
+                                <form action="/delete" method="POST" class="col-md-6 p-0">
+                                    <input type="hidden" name="id" placeholder="" value="{{ student.id }}">
+                                    <button type="submit" class="btn btn-outline-danger btn-delete">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

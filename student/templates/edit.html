@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="col-md-4 offset-md-4">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Edit student</h2>
+        </div>
+        <div class="card-body">
+            <form action="/update" method="POST">
+                <input type="hidden" name="id" placeholder="id" value="{{ student.0 }}">
+                <div class="form-floating mb-2">
+                    <input type="text" name="first_name" class="form-control" placeholder="" value="{{ student.1 }}">
+                    <label>First name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" name="last_name" class="form-control" placeholder="" value="{{ student.2 }}">
+                    <label>Last name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" name="city" class="form-control" placeholder="" value="{{ student.3 }}">
+                    <label>City</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="number" name="semester" class="form-control" placeholder="" value="{{ student.4 }}">
+                    <label>Semester</label>
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-outline-primary">EDIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
